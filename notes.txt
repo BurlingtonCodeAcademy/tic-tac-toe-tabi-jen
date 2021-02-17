@@ -1,0 +1,16 @@
+-border around divs
+-if player x turn, 'onclick' innertext = x (for gameboard)
+-start button
+
+-random generator for computer
+    -array of div id's 
+    -generate random number between 1 and 8 insert into cell-# format w/lookup table (status?)
+
+-status //disabled buttons 
+-buttons that fill each div, gives clickability and disability, -give borders for the buttons 
+-adding status -- look at GJ's code
+
+if 3 cells in a row = each other then select those cells and text-decoration: strikethrough
+
+logic for getting crossout/winning
+if cell0.innertext === cell1.innertext && cell0.innertext === cell2.innertext => text-decoration strikethrough OR the border of the button flashes or change color w/e 

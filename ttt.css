@@ -1,0 +1,76 @@
+/*-----containers-----*/
+.board {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.boardRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.cellContainer {
+    height: 100px;
+    width: 100px;
+}
+
+.status {
+    display: flex;
+    justify-content: center;
+    /*add in padding/margin for top*/
+}
+
+h2 {
+    text-align: center;
+}
+
+/*----cells----*/
+
+#cell-0 {
+    border-bottom: solid black 2px;
+    border-right: solid black 2px;
+}
+#cell-1 {
+    border-left: solid black 2px;
+    border-bottom: solid black 2px;
+    border-right: solid black 2px;
+}
+
+#cell-2 {
+    border-left: solid black 2px;
+    border-bottom: solid black 2px;
+}
+
+#cell-3 {
+    border-top: solid black 2px;
+    border-right: solid black 2px;
+    border-bottom: solid black 2px;
+}
+
+#cell-4 {
+    border: solid black 2px;
+}
+
+#cell-5 { 
+    border-top: solid black 2px;
+    border-left: solid black 2px;
+    border-bottom: solid black 2px;
+}
+
+#cell-6 {
+    border-top: solid black 2px;
+    border-right: solid black 2px;
+}
+
+#cell-7 {
+    border-left: solid black 2px;
+    border-top: solid black 2px;
+    border-right: solid black 2px;
+}
+
+#cell-8 {
+    border-left: solid black 2px;
+    border-top: solid black 2px;
+}
