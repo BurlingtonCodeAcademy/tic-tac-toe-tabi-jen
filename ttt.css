@@ -22,11 +22,16 @@
     /*add in padding/margin for top*/
 }
 
-h2 {
+#statusWrapper{
     text-align: center;
 }
 
 /*----cells----*/
+
+.cellButton {
+    height: 100px;
+    width: 100px;
+}
 
 #cell-0 {
     border-bottom: solid black 2px;
