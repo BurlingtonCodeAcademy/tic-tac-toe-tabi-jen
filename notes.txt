@@ -16,16 +16,23 @@ logic for getting crossout/winning
 if cell0.innertext === cell1.innertext && cell0.innertext === cell2.innertext => text-decoration strikethrough OR the border of the button flashes or change color w/e 
 
 
-when you hit start button, status will change to player x's turn 
---> they choose a cell, it populates with x 
---> --> status changes to player o's turn
-cycle through that until winner or draw
+----winning conditions----
+-if someone wins all  buttons that are not disabled, are disabled, and start button becomes enabled again...say play again
+-change status when someone wins 
+-if XMoves + OMoves = 9 then it is a draw and nobody wins (if nobody has won yet)
+-winner = true for timer to stop
 
 
-making the function playerXTurn conditional based off of which player's turn 
+-check if innerText of the cells if length > 0 ...disable button 
 
-if system status = x, do this 
--->at end of this change status to o, do this
 
-make the status equal X after they choose a cell, status !== x and so equals O // true or false 
-let x = status === true || = o  
+
+TODO:
+
+- add timer
+- finish win condition
+- style everything
+- maker computer player (dumb to start.. using random)
+-get the system to draw line through winning cells
+-names
+-can't add to a disabled box
