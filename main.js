@@ -53,6 +53,10 @@ function play(systemStatus) {
 function playerXTurn(event) {
   // event.target.disabled = true;
   cellId = event.target.parentNode.id;
+  if(event.target.innerText.length > 0){
+    status.innerText = "Please pick valid move";
+  } else {
+
   XMoves.push(cellId);
   event.target.innerText = "X";
   status.innerText = "Player O's move...";
@@ -62,13 +66,18 @@ function playerXTurn(event) {
   }
   //   return systemStatus;
   hasWon(XMoves, winningCombinations);
-
+  }
   play(systemStatus);
 }
 
 function playerOTurn(event) {
   // event.target.disabled = true;
   cellId = event.target.parentNode.id;
+  if(event.target.innerText.length > 0){
+    status.innerText = "Please pick valid move";
+
+  } else {
+
   OMoves.push(cellId);
   console.log(OMoves);
   event.target.innerText = "O";
@@ -80,7 +89,8 @@ function playerOTurn(event) {
   }
   //   return systemStatus;
   hasWon(OMoves, winningCombinations);
-  play(systemStatus);
+} 
+play(systemStatus);
 }
 
 //how to win..
