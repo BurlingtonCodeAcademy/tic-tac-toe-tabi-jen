@@ -6,6 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Tic Tac Toe</title>
     <link rel="stylesheet" href="ttt.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Inline+Display:wght@300&family=Spartan:wght@100&display=swap"
+      rel="stylesheet"
+    />
   </head>
 
   <body>
@@ -13,34 +18,52 @@
       <!--includes name of game, player status, and timer-->
       <div id="statusWrapper">
         <div id="title">
-          <h2>Tic Tac Toe</h2>
+          <h2>TIC TAC TOE</h2>
         </div>
-        <div id = "timer">0</div>
-        
+        <div id="timer">0</div>
+
         <div id="status">Lets get started.....</div>
       </div>
       <!--this is the interactive game board-->
       <div class="board">
         <div class="boardRow" id="row-1">
-          <div class="cellContainer" id="cell-0"><button class = "cellButton"></button></div>
-          <div class="cellContainer" id="cell-1"><button class = "cellButton"></button></div>
-          <div class="cellContainer" id="cell-2"><button class = "cellButton"></button></div>
+          <div class="cellContainer" id="cell-0">
+            <button class="cellButton"></button>
+          </div>
+          <div class="cellContainer" id="cell-1">
+            <button class="cellButton"></button>
+          </div>
+          <div class="cellContainer" id="cell-2">
+            <button class="cellButton"></button>
+          </div>
         </div>
         <div class="boardRow" id="row-2">
-          <div class="cellContainer" id="cell-3"><button class = "cellButton"></button></div>
-          <div class="cellContainer" id="cell-4"><button class = "cellButton"></button></div>
-          <div class="cellContainer" id="cell-5"><button class = "cellButton"></button></div>
+          <div class="cellContainer" id="cell-3">
+            <button class="cellButton"></button>
+          </div>
+          <div class="cellContainer" id="cell-4">
+            <button class="cellButton"></button>
+          </div>
+          <div class="cellContainer" id="cell-5">
+            <button class="cellButton"></button>
+          </div>
         </div>
         <div class="boardRow" id="row-3">
-          <div class="cellContainer" id="cell-6"><button class = "cellButton"></button></div>
-          <div class="cellContainer" id="cell-7"><button class = "cellButton"></button></div>
-          <div class="cellContainer" id="cell-8"><button class = "cellButton"></button></div>
+          <div class="cellContainer" id="cell-6">
+            <button class="cellButton"></button>
+          </div>
+          <div class="cellContainer" id="cell-7">
+            <button class="cellButton"></button>
+          </div>
+          <div class="cellContainer" id="cell-8">
+            <button class="cellButton"></button>
+          </div>
         </div>
       </div>
       <!--button that starts the game-->
       <div class="status">
-        <button id="start" type="button">Two Player Game</button>
-        <button id="compStart" type="button">Play Computer</button> 
+        <button id="start" class = "start-button" type="button">Two Player Game</button>
+        <button id="compStart" class= "start-button" type="button">Play Computer</button>
       </div>
     </div>
     <script src="main.js"></script>

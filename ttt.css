@@ -3,6 +3,8 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin-top: 25px;
+    margin-bottom: 25px;
 }
 
 .boardRow {
@@ -26,56 +28,73 @@
     text-align: center;
 }
 
+h2 {
+    font-family: Spartan, sans-serif;
+    margin-bottom: 25px;
+    margin-top: 45px;
+}
 /*----cells----*/
 
 .cellButton {
     height: 100px;
     width: 100px;
+    border: none;
+    background-color: white;
 }
 
 #cell-0 {
-    border-bottom: solid black 2px;
-    border-right: solid black 2px;
+    border-bottom: solid black .5px;
+    border-right: solid black .5px;
 }
 #cell-1 {
-    border-left: solid black 2px;
-    border-bottom: solid black 2px;
-    border-right: solid black 2px;
+    border-left: solid black .5px; 
+    border-bottom: solid black .5px;
+    border-right: solid black .5px;
 }
 
 #cell-2 {
-    border-left: solid black 2px;
-    border-bottom: solid black 2px;
+    border-left: solid black .5px;
+    border-bottom: solid black .5px;
 }
 
 #cell-3 {
-    border-top: solid black 2px;
-    border-right: solid black 2px;
-    border-bottom: solid black 2px;
+    border-top: solid black .5px;
+    border-right: solid black .5px;
+    border-bottom: solid black .5px;
 }
 
 #cell-4 {
-    border: solid black 2px;
+    border: solid black .5px;
 }
 
 #cell-5 { 
-    border-top: solid black 2px;
-    border-left: solid black 2px;
-    border-bottom: solid black 2px;
+    border-top: solid black .5px;
+    border-left: solid black .5px;
+    border-bottom: solid black .5px;
 }
 
 #cell-6 {
-    border-top: solid black 2px;
-    border-right: solid black 2px;
+    border-top: solid black .5px;
+    border-right: solid black .5px;
 }
 
 #cell-7 {
-    border-left: solid black 2px;
-    border-top: solid black 2px;
-    border-right: solid black 2px;
+    border-left: solid black .5px;
+    border-top: solid black .5px;
+    border-right: solid black .5px;
 }
 
 #cell-8 {
-    border-left: solid black 2px;
-    border-top: solid black 2px;
+    border-left: solid black .5px;
+    border-top: solid black .5px;
+}
+
+/*-------buttons--------*/
+
+.start-button {
+    border: none;
+    background-color: tan;
+    padding: 10px;
+    margin-left: 15px;
+    margin-right: 15px;
 }

@@ -36,3 +36,4 @@ TODO:
 -get the system to draw line through winning cells 
 -names
 -player vs player // player vs computer. add comp condition
+- make x call appropriate function after play (comPlay or play)
