@@ -18,10 +18,12 @@ if cell0.innertext === cell1.innertext && cell0.innertext === cell2.innertext =>
 
 ----winning conditions----
 -if XMoves + OMoves = 9 then it is a draw and nobody wins (if nobody has won yet)
-
-
-
 -check if innerText of the cells if length > 0 ...disable button 
+
+
+-----computer-----
+array of possible moves / every time someone makes a move, it's subtracted from the array 
+--let computer randomly choose from the array of possible moves
 
 
 
@@ -33,3 +35,4 @@ TODO:
 - maker computer player (dumb to start.. using random)
 -get the system to draw line through winning cells 
 -names
+-player vs player // player vs computer. add comp condition

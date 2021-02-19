@@ -1,17 +1,30 @@
 let start = document.getElementById("start");
+let compStart = document.getElementById("compStart");
 let status = document.getElementById("status");
 let cellButton = Array.from(document.getElementsByClassName("cellButton"));
 let timer = document.getElementById("timer");
 
 //define variables
-let systemStatus = true;
-let win = false;
-let cell;
-let cellId;
-let interval;
-let XMoves = [];
-let OMoves = [];
-let playTimer;
+let systemStatus = true; // whose turn it is
+let winStatus = false;
+let cell; // cell from within cellButton array
+let cellId; // actual div id from html
+let interval; // shows the timer count in seconds
+let playTimer; // the timer itself
+
+let XMoves = []; // creates array of moves by player X
+let OMoves = []; // creates array of moves by player O
+let possibleMoves = [
+  "cell-0",
+  "cell-1",
+  "cell-2",
+  "cell-3",
+  "cell-4",
+  "cell-5",
+  "cell-6",
+  "cell-7",
+  "cell-8",
+]; // list of all cells
 
 //start function, starts when player clicks 'start' button. timer starts at 1 second intervals. status changes to reflect which player's turn. each players move gets stored in an array. once a cell is chosen, it is disabled.
 start.addEventListener("click", () => {
@@ -26,6 +39,20 @@ start.addEventListener("click", () => {
     OMoves = [];
   }
   play(systemStatus);
+});
+
+compStart.addEventListener("click", () => {
+  compStart.disabled = true;
+  interval = 0;
+  playTimer = setInterval(timeFunction, 1000);
+  status.innerText = "Player X's move..."; // can update later
+  for (cell of cellButton) {
+    cell.innerText = "";
+    cell.disabled = false;
+    XMoves = [];
+    OMoves = [];
+  }
+  comPlay(systemStatus);
 });
 
 //timer function. starts at 0 and goes up by 1 second at a time. changing the inner text of the timer div to reflect the seconds passed.
@@ -47,6 +74,20 @@ function play(systemStatus) {
   }
   // }
 }
+
+function comPlay(systemStatus) {
+  if (systemStatus) {
+    for (cell of cellButton) {
+      cell.addEventListener("click", playerXTurn);
+    }
+  } else {
+    if (winStatus === false) {
+      compTurn();
+    }
+  }
+  // }
+}
+
 // play functions
 function playerXTurn(event) {
   // event.target.disabled = true;
@@ -54,7 +95,11 @@ function playerXTurn(event) {
   if (event.target.innerText.length > 0) {
     status.innerText = "Please pick valid move";
   } else {
+    //  push X move to moves array
     XMoves.push(cellId);
+    //  remove move from possible moves array
+    possibleMoves = possibleMoves.filter((item) => item !== cellId);
+
     event.target.innerText = "X";
     status.innerText = "Player O's move...";
     systemStatus = false;
@@ -64,7 +109,7 @@ function playerXTurn(event) {
     //   return systemStatus;
     hasWon(XMoves, winningCombinations);
   }
-  play(systemStatus);
+  comPlay(systemStatus);
 }
 
 function playerOTurn(event) {
@@ -73,12 +118,14 @@ function playerOTurn(event) {
   if (event.target.innerText.length > 0) {
     status.innerText = "Please pick valid move";
   } else {
+    // push move to moves array
     OMoves.push(cellId);
-    console.log(OMoves);
+    // remove move from possible moves array
+    possibleMoves = possibleMoves.filter((item) => item !== cellId);
+
     event.target.innerText = "O";
     status.innerText = "Player X's move...";
     systemStatus = true;
-    console.log(systemStatus);
     for (cell of cellButton) {
       cell.removeEventListener("click", playerOTurn);
     }
@@ -86,6 +133,36 @@ function playerOTurn(event) {
     hasWon(OMoves, winningCombinations);
   }
   play(systemStatus);
+}
+
+function compTurn() {
+  // generate random number
+  let randomCellInt = getRandomInt(possibleMoves.length);
+  console.log(randomCellInt);
+  // index possible moves to get cell to play
+  cellId = possibleMoves[randomCellInt];
+  console.log(cellId);
+  // push move to moves array
+  OMoves.push(cellId);
+  // remove move from possible moves array
+  possibleMoves = possibleMoves.filter((item) => item !== cellId);
+
+  let tempElement = document.getElementById(cellId);
+
+  tempElement.firstChild.innerText = "O";
+  status.innerText = "Player X's move...";
+  systemStatus = true;
+  // for (cell of cellButton) {
+  //   cell.removeEventListener("click", playerOTurn);
+  // }
+  //   return systemStatus;
+  hasWon(OMoves, winningCombinations);
+
+  comPlay(systemStatus);
+}
+
+function getRandomInt(max) {
+  return Math.floor(Math.random() * Math.floor(max));
 }
 
 //how to win..
@@ -109,7 +186,6 @@ function hasWon(moves, winningCombinations) {
     (array) =>
       // for each small array look to see if each item is present.. if it is add it to the new array
       array.filter((item) => {
-        console.log(item);
         // return what index in the players moves the winning combo item is.. if it exists in player moves, add to new array
         return moves.indexOf(item) > -1;
         // when lenght is three add this array to newly created array
@@ -118,7 +194,8 @@ function hasWon(moves, winningCombinations) {
 
   // if foundResults includes an array of length three...
   if (foundResults.length > 0) {
-    // annouce someone won
+    // announce someone won
+    winStatus = true;
     status.innerText = "someone won";
 
     // disable all play board buttons so play cant continue
@@ -128,6 +205,7 @@ function hasWon(moves, winningCombinations) {
 
     // re-enable start button so play can resume..
     start.disabled = false;
+    compStart.disabled = false;
 
     // stop the timer
     clearInterval(playTimer);
