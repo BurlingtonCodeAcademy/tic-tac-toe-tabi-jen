@@ -17,10 +17,8 @@ if cell0.innertext === cell1.innertext && cell0.innertext === cell2.innertext =>
 
 
 ----winning conditions----
--if someone wins all  buttons that are not disabled, are disabled, and start button becomes enabled again...say play again
--change status when someone wins 
 -if XMoves + OMoves = 9 then it is a draw and nobody wins (if nobody has won yet)
--winner = true for timer to stop
+
 
 
 -check if innerText of the cells if length > 0 ...disable button 
@@ -29,10 +27,9 @@ if cell0.innertext === cell1.innertext && cell0.innertext === cell2.innertext =>
 
 TODO:
 
-- add timer
 - finish win condition
+    -- print WHO won.. not just that someone won
 - style everything
 - maker computer player (dumb to start.. using random)
--get the system to draw line through winning cells
+-get the system to draw line through winning cells 
 -names
--can't add to a disabled box
