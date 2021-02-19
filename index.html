@@ -10,12 +10,16 @@
 
   <body>
     <div id="mainWrappper">
+      <!--includes name of game, player status, and timer-->
       <div id="statusWrapper">
         <div id="title">
           <h2>Tic Tac Toe</h2>
         </div>
+        <div id = "timer">0</div>
+        
         <div id="status">Lets get started.....</div>
       </div>
+      <!--this is the interactive game board-->
       <div class="board">
         <div class="boardRow" id="row-1">
           <div class="cellContainer" id="cell-0"><button class = "cellButton"></button></div>
@@ -33,7 +37,7 @@
           <div class="cellContainer" id="cell-8"><button class = "cellButton"></button></div>
         </div>
       </div>
-
+      <!--button that starts the game-->
       <div class="status">
         <button id="start" type="button">Start Game</button>
       </div>
