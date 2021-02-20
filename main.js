@@ -210,7 +210,13 @@ function hasWon(moves, winningCombinations) {
   if (foundResults.length > 0) {
     // announce someone won
     winStatus = true;
-    
+    // change border color item.setAttribute("id", "winningCell");
+    foundResults[0].forEach(item => {
+      tempElement = document.getElementById(item)
+      console.log(tempElement)
+      tempElement.id = "winningCell";
+    });
+
     if (systemStatus === false) {
       status.innerText = "Player X has won";
       
