@@ -3,7 +3,7 @@ let compStart = document.getElementById("compStart");
 let status = document.getElementById("status");
 let cellButton = Array.from(document.getElementsByClassName("cellButton"));
 let timer = document.getElementById("timer");
-let replay = document.getElementById("replay")
+let replay = document.getElementById("replay");
 
 //define variables
 let systemStatus = true; // whose turn it is
@@ -13,7 +13,7 @@ let cell; // cell from within cellButton array
 let cellId; // actual div id from html
 let interval; // shows the timer count in seconds
 let playTimer; // the timer itself
-
+let userName
 let XMoves = []; // creates array of moves by player X
 let OMoves = []; // creates array of moves by player O
 let possibleMoves = [
@@ -30,46 +30,66 @@ let possibleMoves = [
 
 //start function, starts when player clicks 'start' button. timer starts at 1 second intervals. status changes to reflect which player's turn. each players move gets stored in an array. once a cell is chosen, it is disabled.
 start.addEventListener("click", () => {
+  // name in put popup
+  userName = window.prompt("Would you like to enter a name for player X?...")
+  userOName = window.prompt("Would you like to enter a name for player O?...")
+  
+  if(!userName){
+    userName = "X"
+  };
+
+  if(!userOName){
+    userOName = "O"
+  };
+  //
   start.disabled = true;
   compStart.disabled = true;
   interval = 0;
   playTimer = setInterval(timeFunction, 1000);
-  status.innerText = "Player X's move..."; // can update later
+  status.innerText = `${userName}'s move..`; // can update later
   for (cell of cellButton) {
     cell.innerText = "";
     cell.disabled = false;
     XMoves = [];
     OMoves = [];
   }
-  oStatus = "human"
+  oStatus = "human";
   play(systemStatus);
 });
 
 compStart.addEventListener("click", () => {
+  userName = window.prompt("Would you like to enter a name for player X?...")
+  
+  if(!userName){
+    userName = "X"
+  };
+  
+  userOName = "O"
+
+
   compStart.disabled = true;
   start.disabled = true;
   interval = 0;
   playTimer = setInterval(timeFunction, 1000);
-  status.innerText = "Player X's move..."; // can update later
+  status.innerText = `${userName}'s move..`; // can update later
   for (cell of cellButton) {
     cell.innerText = "";
     cell.disabled = false;
     XMoves = [];
     OMoves = [];
   }
-  oStatus = "computer"
+  oStatus = "computer";
   comPlay(systemStatus);
 });
 
-
-replay.addEventListener("click", () =>{
-  document.location.reload()
-})
+replay.addEventListener("click", () => {
+  document.location.reload();
+});
 
 //timer function. starts at 0 and goes up by 1 second at a time. changing the inner text of the timer div to reflect the seconds passed.
 function timeFunction() {
   interval += 1;
-  timer.innerText = interval;
+  timer.innerText = "Time elapsed " + interval + " seconds.";
   // console.log(interval)
 }
 //play function, determines which player's turn it is.
@@ -93,7 +113,7 @@ function comPlay(systemStatus) {
     }
   } else {
     if (winStatus === false) {
-      compTurn();
+    setTimeout(compTurn,2000);
     }
   }
   // }
@@ -104,7 +124,7 @@ function playerXTurn(event) {
   // event.target.disabled = true;
   cellId = event.target.parentNode.id;
   if (event.target.innerText.length > 0) {
-    status.innerText = "Please pick valid move";
+    status.innerText = "Please select an empty cell";
   } else {
     //  push X move to moves array
     XMoves.push(cellId);
@@ -116,17 +136,14 @@ function playerXTurn(event) {
       cell.removeEventListener("click", playerXTurn);
     }
     //   return systemStatus;
-   status.innerText = "Player O's move...";
+    status.innerText = `${userOName}'s move...`;
     systemStatus = false;
     hasWon(XMoves, winningCombinations);
-    
-    
-    
   }
-  if (oStatus === "human"){
+  if (oStatus === "human") {
     play(systemStatus);
-  } else{
-  comPlay(systemStatus);
+  } else {
+    comPlay(systemStatus);
   }
 }
 
@@ -142,17 +159,16 @@ function playerOTurn(event) {
     possibleMoves = possibleMoves.filter((item) => item !== cellId);
 
     event.target.innerText = "O";
-    console.log(event.target)
-    
+    console.log(event.target);
+
     for (cell of cellButton) {
       cell.removeEventListener("click", playerOTurn);
     }
     //   return systemStatus;
-    status.innerText = "Player X's move...";
+    status.innerText = `${userName}'s move..`;
     systemStatus = true;
 
     hasWon(OMoves, winningCombinations);
-  
   }
   play(systemStatus);
 }
@@ -169,13 +185,8 @@ function compTurn() {
 
   let tempElement = document.getElementById(cellId);
   tempElement.children[0].innerText = "O";
-  
-  // for (cell of cellButton) {
-  //   cell.removeEventListener("click", playerOTurn);
-  // }
-  //   return systemStatus;
-  
-  status.innerText = "Player X's move...";
+
+  status.innerText = `${userName}'s move..`;
   systemStatus = true;
 
   hasWon(OMoves, winningCombinations);
@@ -219,20 +230,19 @@ function hasWon(moves, winningCombinations) {
     // announce someone won
     winStatus = true;
     // change border color item.setAttribute("id", "winningCell");
-    foundResults[0].forEach(item => {
-      tempElement = document.getElementById(item)
-      console.log(tempElement)
+    foundResults[0].forEach((item) => {
+      tempElement = document.getElementById(item);
+      console.log(tempElement);
       tempElement.id = "winningCell";
     });
 
     if (systemStatus === false) {
-      status.innerText = "Player X has won";
-      
-    } else if (systemStatus === true && oStatus === "computer" ) {
+      status.innerText = `${userName} has won!`;
+    } else if (systemStatus === true && oStatus === "computer") {
       status.innerText = "The computer has won";
     } else {
-      status.innerText = "Player O won"
-    };
+      status.innerText = `${userOName} won`;
+    }
     // status.innerText = "someone won";
 
     // disable all play board buttons so play cant continue
@@ -252,9 +262,9 @@ function hasWon(moves, winningCombinations) {
   } else if (XMoves.length + OMoves.length === 9) {
     status.innerText = "its a draw";
     let drawArray = XMoves.concat(OMoves);
-    drawArray.forEach(item => {
-      tempElement = document.getElementById(item)
-      console.log(tempElement)
+    drawArray.forEach((item) => {
+      tempElement = document.getElementById(item);
+      console.log(tempElement);
       tempElement.id = "winningCell";
     });
 
@@ -269,5 +279,4 @@ function hasWon(moves, winningCombinations) {
     // stop the timer
     clearInterval(playTimer);
   }
-
 }
