@@ -3,6 +3,7 @@ let compStart = document.getElementById("compStart");
 let status = document.getElementById("status");
 let cellButton = Array.from(document.getElementsByClassName("cellButton"));
 let timer = document.getElementById("timer");
+let replay = document.getElementById("replay")
 
 //define variables
 let systemStatus = true; // whose turn it is
@@ -30,6 +31,7 @@ let possibleMoves = [
 //start function, starts when player clicks 'start' button. timer starts at 1 second intervals. status changes to reflect which player's turn. each players move gets stored in an array. once a cell is chosen, it is disabled.
 start.addEventListener("click", () => {
   start.disabled = true;
+  compStart.disabled = true;
   interval = 0;
   playTimer = setInterval(timeFunction, 1000);
   status.innerText = "Player X's move..."; // can update later
@@ -45,6 +47,7 @@ start.addEventListener("click", () => {
 
 compStart.addEventListener("click", () => {
   compStart.disabled = true;
+  start.disabled = true;
   interval = 0;
   playTimer = setInterval(timeFunction, 1000);
   status.innerText = "Player X's move..."; // can update later
@@ -57,6 +60,11 @@ compStart.addEventListener("click", () => {
   oStatus = "computer"
   comPlay(systemStatus);
 });
+
+
+replay.addEventListener("click", () =>{
+  document.location.reload()
+})
 
 //timer function. starts at 0 and goes up by 1 second at a time. changing the inner text of the timer div to reflect the seconds passed.
 function timeFunction() {
@@ -233,15 +241,22 @@ function hasWon(moves, winningCombinations) {
     }
 
     // re-enable start button so play can resume..
-    start.disabled = false;
-    compStart.disabled = false;
-
+    // start.disabled = false;
+    // compStart.disabled = false;
+    replay.disabled = false;
     // stop the timer
     clearInterval(playTimer);
 
+    // DRAW SCENARIO
     // if XMoves + OMoves = 9 then it is a draw and nobody wins (only triggered if nobody has won yet)
   } else if (XMoves.length + OMoves.length === 9) {
     status.innerText = "its a draw";
+    let drawArray = XMoves.concat(OMoves);
+    drawArray.forEach(item => {
+      tempElement = document.getElementById(item)
+      console.log(tempElement)
+      tempElement.id = "winningCell";
+    });
 
     // disable all play board buttons so play cant continue
     for (cell of cellButton) {
@@ -249,9 +264,10 @@ function hasWon(moves, winningCombinations) {
     }
 
     // re-enable start button so play can resume..
-    start.disabled = false;
+    replay.disabled = false;
 
     // stop the timer
     clearInterval(playTimer);
   }
+
 }
