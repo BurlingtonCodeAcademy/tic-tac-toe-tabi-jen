@@ -1,10 +1,28 @@
 /*-----containers-----*/
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+}
+
 .board {
     display: flex;
     flex-direction: column;
     justify-content: center;
     margin-top: 25px;
     margin-bottom: 25px;
+}
+
+#status {
+    font-size: 18px;
+    font-family: Spartan, sans-serif;
+}
+
+#timer {
+    font-size: 20px;
+    padding-bottom: 15px;
+    font-family: Spartan, sans-serif;
 }
 
 .boardRow {
@@ -14,32 +32,40 @@
 }
 
 .cellContainer {
-    height: 100px;
-    width: 100px;
+    height: auto;
+    width: auto;
 }
 
-.status {
-    display: flex;
-    justify-content: center;
-    /*add in padding/margin for top*/
-}
 
 #statusWrapper{
     text-align: center;
 }
 
+#mainWrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
 h2 {
     font-family: Spartan, sans-serif;
+    font-size: 40px;
     margin-bottom: 25px;
     margin-top: 45px;
 }
+
+
 /*----cells----*/
 
 .cellButton {
-    height: 100px;
-    width: 100px;
+    height: 200px;
+    width: 200px;
     border: none;
     background-color: white;
+    font-size: 40px;
+    font-family: Spartan, sans-serif;
+    color: black;
 }
 
 #cell-0 {
@@ -89,6 +115,8 @@ h2 {
     border-top: solid black .5px;
 }
 
+
+
 /*-------buttons--------*/
 
 .start-button {
@@ -97,4 +125,12 @@ h2 {
     padding: 10px;
     margin-left: 15px;
     margin-right: 15px;
+    width: 140px;
+    font-family: Spartan, sans-serif;
+}
+
+.play-button {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
 }

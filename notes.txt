@@ -29,11 +29,11 @@ array of possible moves / every time someone makes a move, it's subtracted from 
 
 TODO:
 
-- finish win condition
-    -- print WHO won.. not just that someone won
 - style everything
-- maker computer player (dumb to start.. using random)
+- maker computer player (make smarter if we want)
 -get the system to draw line through winning cells 
 -names
--player vs player // player vs computer. add comp condition
-- make x call appropriate function after play (comPlay or play)
+-let play again for comp condition
+
+
+animation for borders -- in hasWon function?

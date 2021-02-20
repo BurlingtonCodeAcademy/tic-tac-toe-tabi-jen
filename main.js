@@ -7,6 +7,7 @@ let timer = document.getElementById("timer");
 //define variables
 let systemStatus = true; // whose turn it is
 let winStatus = false;
+let oStatus;
 let cell; // cell from within cellButton array
 let cellId; // actual div id from html
 let interval; // shows the timer count in seconds
@@ -38,6 +39,7 @@ start.addEventListener("click", () => {
     XMoves = [];
     OMoves = [];
   }
+  oStatus = "human"
   play(systemStatus);
 });
 
@@ -52,6 +54,7 @@ compStart.addEventListener("click", () => {
     XMoves = [];
     OMoves = [];
   }
+  oStatus = "computer"
   comPlay(systemStatus);
 });
 
@@ -101,15 +104,22 @@ function playerXTurn(event) {
     possibleMoves = possibleMoves.filter((item) => item !== cellId);
 
     event.target.innerText = "X";
-    status.innerText = "Player O's move...";
-    systemStatus = false;
     for (cell of cellButton) {
       cell.removeEventListener("click", playerXTurn);
     }
     //   return systemStatus;
+   status.innerText = "Player O's move...";
+    systemStatus = false;
     hasWon(XMoves, winningCombinations);
+    
+    
+    
   }
+  if (oStatus === "human"){
+    play(systemStatus);
+  } else{
   comPlay(systemStatus);
+  }
 }
 
 function playerOTurn(event) {
@@ -124,13 +134,17 @@ function playerOTurn(event) {
     possibleMoves = possibleMoves.filter((item) => item !== cellId);
 
     event.target.innerText = "O";
-    status.innerText = "Player X's move...";
-    systemStatus = true;
+    console.log(event.target)
+    
     for (cell of cellButton) {
       cell.removeEventListener("click", playerOTurn);
     }
     //   return systemStatus;
+    status.innerText = "Player X's move...";
+    systemStatus = true;
+
     hasWon(OMoves, winningCombinations);
+  
   }
   play(systemStatus);
 }
@@ -138,24 +152,24 @@ function playerOTurn(event) {
 function compTurn() {
   // generate random number
   let randomCellInt = getRandomInt(possibleMoves.length);
-  console.log(randomCellInt);
   // index possible moves to get cell to play
   cellId = possibleMoves[randomCellInt];
-  console.log(cellId);
   // push move to moves array
   OMoves.push(cellId);
   // remove move from possible moves array
   possibleMoves = possibleMoves.filter((item) => item !== cellId);
 
   let tempElement = document.getElementById(cellId);
-
-  tempElement.firstChild.innerText = "O";
-  status.innerText = "Player X's move...";
-  systemStatus = true;
+  tempElement.children[0].innerText = "O";
+  
   // for (cell of cellButton) {
   //   cell.removeEventListener("click", playerOTurn);
   // }
   //   return systemStatus;
+  
+  status.innerText = "Player X's move...";
+  systemStatus = true;
+
   hasWon(OMoves, winningCombinations);
 
   comPlay(systemStatus);
@@ -196,7 +210,15 @@ function hasWon(moves, winningCombinations) {
   if (foundResults.length > 0) {
     // announce someone won
     winStatus = true;
-    status.innerText = "someone won";
+
+    if (systemStatus === false) {
+      status.innerText = "Player X has won";
+    } else if (systemStatus === true && oStatus === "computer" ) {
+      status.innerText = "The computer has won";
+    } else {
+      status.innerText = "Player O won"
+    };
+    // status.innerText = "someone won";
 
     // disable all play board buttons so play cant continue
     for (cell of cellButton) {
@@ -209,13 +231,6 @@ function hasWon(moves, winningCombinations) {
 
     // stop the timer
     clearInterval(playTimer);
-
-    // if (whoseTurn === "computer") {
-    //   displayResult("You won");
-    // } else if (whoseTurn === "player") {
-    //   displayResult("The computer has won");
-    // }
-    // didSomeoneWin = true;
 
     // if XMoves + OMoves = 9 then it is a draw and nobody wins (only triggered if nobody has won yet)
   } else if (XMoves.length + OMoves.length === 9) {
