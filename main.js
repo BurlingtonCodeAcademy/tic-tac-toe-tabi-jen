@@ -210,9 +210,10 @@ function hasWon(moves, winningCombinations) {
   if (foundResults.length > 0) {
     // announce someone won
     winStatus = true;
-
+    
     if (systemStatus === false) {
       status.innerText = "Player X has won";
+      
     } else if (systemStatus === true && oStatus === "computer" ) {
       status.innerText = "The computer has won";
     } else {

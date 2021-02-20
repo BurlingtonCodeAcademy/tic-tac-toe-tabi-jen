@@ -36,4 +36,7 @@ TODO:
 -let play again for comp condition
 
 
-animation for borders -- in hasWon function?
+animation for borders -- in hasWon function:
+
+
+make one box be completely highlighted 
