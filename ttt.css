@@ -1,4 +1,5 @@
 /*-----containers-----*/
+
 body {
   display: flex;
   flex-direction: column;
@@ -68,15 +69,15 @@ h2 {
   margin: 5px;
 }
 
- #cell-0 {
+#cell-0 {
   border-bottom: solid black 0.5px;
   border-right: solid black 0.5px;
 }
- #cell-1 {
+#cell-1 {
   border-left: solid black 0.5px;
   border-bottom: solid black 0.5px;
   border-right: solid black 0.5px;
-} 
+}
 
 #cell-2 {
   border-left: solid black 0.5px;
@@ -115,9 +116,9 @@ h2 {
   border-top: solid black 0.5px;
 }
 
-/*---animations---*/
+/*-----animations for win/draw-----*/
 
-#winningCell{
+#winningCell {
   --border-width: 3px;
 
   position: relative;
@@ -129,31 +130,30 @@ h2 {
   color: white;
   border-radius: var(--border-width);
 }
-  #winningCell::after {
-    position: absolute;
-    content: "";
-    top: calc(-1 * var(--border-width));
-    left: calc(-1 * var(--border-width));
-    z-index: -1;
-    width: calc(100% + var(--border-width)*2);
-    height: calc(100% + var(--border-width)*2);
-    background: linear-gradient(
-      60deg,
-      hsl(224, 85%, 66%),
-      hsl(269, 85%, 66%),
-      hsl(314, 85%, 66%),
-      hsl(359, 85%, 66%),
-      hsl(44, 85%, 66%),
-      hsl(89, 85%, 66%),
-      hsl(134, 85%, 66%),
-      hsl(179, 85%, 66%)
-    );
-    background-size: 300% 300%;
-    background-position: 0% 50%;
-    border-radius: calc(2 * var(--border-width));
-    animation: moveGradient 4s alternate infinite;
-  }
-
+#winningCell::after {
+  position: absolute;
+  content: "";
+  top: calc(-1 * var(--border-width));
+  left: calc(-1 * var(--border-width));
+  z-index: -1;
+  width: calc(100% + var(--border-width) * 2);
+  height: calc(100% + var(--border-width) * 2);
+  background: linear-gradient(
+    60deg,
+    hsl(224, 85%, 66%),
+    hsl(269, 85%, 66%),
+    hsl(314, 85%, 66%),
+    hsl(359, 85%, 66%),
+    hsl(44, 85%, 66%),
+    hsl(89, 85%, 66%),
+    hsl(134, 85%, 66%),
+    hsl(179, 85%, 66%)
+  );
+  background-size: 300% 300%;
+  background-position: 0% 50%;
+  border-radius: calc(2 * var(--border-width));
+  animation: moveGradient 4s alternate infinite;
+}
 
 @keyframes moveGradient {
   50% {

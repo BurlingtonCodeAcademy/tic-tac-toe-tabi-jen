@@ -50,14 +50,6 @@ start.addEventListener("click", () => {
   playTimer = setInterval(timeFunction, 1000);
   status.innerText = `${userName}'s move..`; // status shows us whose turn it is
 
-  //  FOR JEN: dont think we need this because of how we refresh now :)
-  // for (cell of cellButton) {
-  //   cell.innerText = "";
-  //   cell.disabled = false;
-  //   XMoves = [];
-  //   OMoves = [];
-  // }
-
   oStatus = "human"; // tell rest of system that o is a human
   play(systemStatus); // call play function
 });
@@ -112,7 +104,6 @@ function play(systemStatus) {
     }
   }
 }
-// FOR JEN: we could combine these two functions by extending our conditionals to include the oStatus variable into it.. think on it :)
 
 // if playing the computer, after player X moves, triggers computer's turn. set a timeOut delay of 2 seconds for computer to make their move.
 function comPlay(systemStatus) {
@@ -264,7 +255,8 @@ function hasWon(moves, winningCombinations) {
   } else if (XMoves.length + OMoves.length === 9) {
     status.innerText = "it's a draw";
     let drawArray = XMoves.concat(OMoves); //combine all moves back into one array
-    drawArray.forEach((item) => { //make all cells have rainbow border css
+    drawArray.forEach((item) => {
+      //make all cells have rainbow border css
       tempElement = document.getElementById(item);
       console.log(tempElement);
       tempElement.id = "winningCell";
