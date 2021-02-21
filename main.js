@@ -8,12 +8,12 @@ let replay = document.getElementById("replay");
 //define variables
 let systemStatus = true; // whose turn it is
 let winStatus = false;
-let oStatus;
+let oStatus; // is player O a human or the computer
 let cell; // cell from within cellButton array
 let cellId; // actual div id from html
 let interval; // shows the timer count in seconds
 let playTimer; // the timer itself
-let userName
+let userName // name user chooses / if not defaults to X
 let XMoves = []; // creates array of moves by player X
 let OMoves = []; // creates array of moves by player O
 let possibleMoves = [
@@ -30,7 +30,7 @@ let possibleMoves = [
 
 //start function, starts when player clicks 'start' button. timer starts at 1 second intervals. status changes to reflect which player's turn. each players move gets stored in an array. once a cell is chosen, it is disabled.
 start.addEventListener("click", () => {
-  // name in put popup
+  // window prompts user to choose their name. if they hit 'cancel', defaults to X and O.
   userName = window.prompt("Would you like to enter a name for player X?...")
   userOName = window.prompt("Would you like to enter a name for player O?...")
   
@@ -41,12 +41,12 @@ start.addEventListener("click", () => {
   if(!userOName){
     userOName = "O"
   };
-  //
+  // when game begins, buttons become disabled. Timer starts counting in second intervals until someone wins
   start.disabled = true;
   compStart.disabled = true;
   interval = 0;
   playTimer = setInterval(timeFunction, 1000);
-  status.innerText = `${userName}'s move..`; // can update later
+  status.innerText = `${userName}'s move..`; // status shows us whose turn it is
   for (cell of cellButton) {
     cell.innerText = "";
     cell.disabled = false;
@@ -57,6 +57,7 @@ start.addEventListener("click", () => {
   play(systemStatus);
 });
 
+// if they choose to play the computer, they can choose their own name, computer defaults to player O. Timer works as it did above, as does status.
 compStart.addEventListener("click", () => {
   userName = window.prompt("Would you like to enter a name for player X?...")
   
@@ -106,6 +107,7 @@ function play(systemStatus) {
   // }
 }
 
+// if playing the computer, after player X moves, triggers computer's turn. set a timeOut delay of 2 seconds for computer to make their move.
 function comPlay(systemStatus) {
   if (systemStatus) {
     for (cell of cellButton) {
@@ -123,7 +125,7 @@ function comPlay(systemStatus) {
 function playerXTurn(event) {
   // event.target.disabled = true;
   cellId = event.target.parentNode.id;
-  if (event.target.innerText.length > 0) {
+  if (event.target.innerText.length > 0) { // if the player chooses a cell that is already chosen, does not work.
     status.innerText = "Please select an empty cell";
   } else {
     //  push X move to moves array
@@ -147,6 +149,7 @@ function playerXTurn(event) {
   }
 }
 
+// if two player game, same as player X but for player O
 function playerOTurn(event) {
   // event.target.disabled = true;
   cellId = event.target.parentNode.id;
@@ -173,6 +176,7 @@ function playerOTurn(event) {
   play(systemStatus);
 }
 
+// function for the computer to play. generates a random cell from the possibleMoves, and populates it/removes it from possibleMoves.
 function compTurn() {
   // generate random number
   let randomCellInt = getRandomInt(possibleMoves.length);
@@ -194,6 +198,7 @@ function compTurn() {
   comPlay(systemStatus);
 }
 
+// function to get a random integer for the computer to make a 'random' move
 function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
@@ -236,6 +241,7 @@ function hasWon(moves, winningCombinations) {
       tempElement.id = "winningCell";
     });
 
+    //alerts who has won if somebody wins
     if (systemStatus === false) {
       status.innerText = `${userName} has won!`;
     } else if (systemStatus === true && oStatus === "computer") {
