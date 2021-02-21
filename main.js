@@ -260,7 +260,7 @@ function hasWon(moves, winningCombinations) {
     // DRAW SCENARIO
     // if XMoves + OMoves = 9 then it is a draw and nobody wins (only triggered if nobody has won yet)
   } else if (XMoves.length + OMoves.length === 9) {
-    status.innerText = "its a draw";
+    status.innerText = "it's a draw";
     let drawArray = XMoves.concat(OMoves);
     drawArray.forEach((item) => {
       tempElement = document.getElementById(item);
