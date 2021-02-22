@@ -1,0 +1,180 @@
+/*-----containers-----*/
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100%;
+}
+
+.board {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+#status {
+  font-size: 18px;
+  font-family: Spartan, sans-serif;
+}
+
+#timer {
+  font-size: 20px;
+  padding-bottom: 15px;
+  font-family: Spartan, sans-serif;
+}
+
+.boardRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.cellContainer {
+  height: 210px;
+  width: 210px;
+}
+
+#statusWrapper {
+  text-align: center;
+}
+
+#mainWrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+h2 {
+  font-family: Spartan, sans-serif;
+  font-size: 40px;
+  margin-bottom: 25px;
+  margin-top: 45px;
+}
+
+/*----cells----*/
+
+.cellButton {
+  height: 200px;
+  width: 200px;
+  border: none;
+  background-color: white;
+  font-size: 40px;
+  font-family: Spartan, sans-serif;
+  color: black;
+  justify-content: center;
+  margin: 5px;
+}
+
+#cell-0 {
+  border-bottom: solid black 0.5px;
+  border-right: solid black 0.5px;
+}
+#cell-1 {
+  border-left: solid black 0.5px;
+  border-bottom: solid black 0.5px;
+  border-right: solid black 0.5px;
+}
+
+#cell-2 {
+  border-left: solid black 0.5px;
+  border-bottom: solid black 0.5px;
+}
+
+#cell-3 {
+  border-top: solid black 0.5px;
+  border-right: solid black 0.5px;
+  border-bottom: solid black 0.5px;
+}
+
+#cell-4 {
+  border: solid black 0.5px;
+}
+
+#cell-5 {
+  border-top: solid black 0.5px;
+  border-left: solid black 0.5px;
+  border-bottom: solid black 0.5px;
+}
+
+#cell-6 {
+  border-top: solid black 0.5px;
+  border-right: solid black 0.5px;
+}
+
+#cell-7 {
+  border-left: solid black 0.5px;
+  border-top: solid black 0.5px;
+  border-right: solid black 0.5px;
+}
+
+#cell-8 {
+  border-left: solid black 0.5px;
+  border-top: solid black 0.5px;
+}
+
+/*-----animations for win/draw-----*/
+
+#winningCell {
+  --border-width: 3px;
+
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 210px;
+  height: 210px;
+  color: white;
+  border-radius: var(--border-width);
+}
+#winningCell::after {
+  position: absolute;
+  content: "";
+  top: calc(-1 * var(--border-width));
+  left: calc(-1 * var(--border-width));
+  z-index: -1;
+  width: calc(100% + var(--border-width) * 2);
+  height: calc(100% + var(--border-width) * 2);
+  background: linear-gradient(
+    60deg,
+    hsl(224, 85%, 66%),
+    hsl(269, 85%, 66%),
+    hsl(314, 85%, 66%),
+    hsl(359, 85%, 66%),
+    hsl(44, 85%, 66%),
+    hsl(89, 85%, 66%),
+    hsl(134, 85%, 66%),
+    hsl(179, 85%, 66%)
+  );
+  background-size: 300% 300%;
+  background-position: 0% 50%;
+  border-radius: calc(2 * var(--border-width));
+  animation: moveGradient 4s alternate infinite;
+}
+
+@keyframes moveGradient {
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/*-------buttons--------*/
+
+.start-button {
+  border: none;
+  background-color: tan;
+  padding: 10px;
+  margin-left: 15px;
+  margin-right: 15px;
+  width: 140px;
+  font-family: Spartan, sans-serif;
+}
+
+.play-button {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
